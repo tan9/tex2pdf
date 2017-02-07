@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  texlive:
+    image: listx/texlive:2016-fonts
+    volumes:
+      - data-volume:/home/tex
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  tex2pdf:
+    image: tan9/tex2pdf:0.0.1
+    volumes:
+      - data-volume:/home/tex
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "8080:8080"
+
+volumes:
+  data-volume:
