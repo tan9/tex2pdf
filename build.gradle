@@ -3,16 +3,18 @@ buildscript {
         springBootVersion = '1.5.1.RELEASE'
     }
     repositories {
-        mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath('com.bmuschko:gradle-docker-plugin:3.0.5')
     }
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
+apply plugin: 'application'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'com.bmuschko.docker-java-application'
 
 jar {
     baseName = 'tex2pdf'
@@ -25,9 +27,17 @@ repositories {
     mavenCentral()
 }
 
-
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('org.springframework.boot:spring-boot-starter-web')
     testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+docker {
+    javaApplication {
+        baseImage = 'openjdk:8-jre-alpine'
+        maintainer = 'Pei-Tang Huang "tangtheone@gmail.com"'
+        port = 8080
+        tag = 'tan9/tex2pdf:0.0.1'
+    }
 }
