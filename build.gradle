@@ -35,7 +35,7 @@ dependencies {
 
 docker {
     javaApplication {
-        baseImage = 'openjdk:8-jre-alpine'
+        baseImage = 'openjdk:8-jre'
         maintainer = 'Pei-Tang Huang "tangtheone@gmail.com"'
         port = 8080
         tag = 'tan9/tex2pdf:0.0.1'
